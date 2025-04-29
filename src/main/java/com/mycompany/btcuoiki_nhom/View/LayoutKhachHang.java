@@ -27,67 +27,61 @@ public class LayoutKhachHang extends javax.swing.JFrame {
             btn_KhachHang_Resert.addActionListener(evt -> btn_KhachHang_ResertActionPerformed(evt));
     }
     private void loadKhachHangData() {
-    DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
-    model.setRowCount(0); // Xóa dữ liệu cũ
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "SELECT * FROM KhachHang"; // Thay bằng tên bảng của bạn
-        PreparedStatement stmt = conn.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("STT"),
-                rs.getString("MaKhachHang"),
-                rs.getString("TenKhachHang"),
-                rs.getString("NgaySinh"),
-                rs.getString("GioiTinh"),
-                rs.getString("DiaChi"),
-                rs.getString("SDT"),
-                rs.getString("LoaiKhachHang"),
-                rs.getString("ChuThich")
-            });
+        DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
+        model.setRowCount(0); // Xóa dữ liệu cũ
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "SELECT tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("tenKH"),
+                    rs.getString("SDT"),
+                    rs.getString("Email"),
+                    rs.getInt("soDuTaiKhoan"),
+                    rs.getString("diaChi"),
+                    rs.getString("gioiTinh")
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
     //thêm khách hàng
     private void btn_KhachHang_ThemActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "INSERT INTO KhachHang (MaKhachHang, TenKhachHang, NgaySinh, GioiTinh, DiaChi, SDT, LoaiKhachHang, ChuThich) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_KhachHang_maKhachHang.getText());
-        stmt.setString(2, txt_KhachHang_tenKhachHang.getText());
-        stmt.setString(3, "2025-04-20"); // Thay bằng giá trị từ ComboBox
-        stmt.setString(4, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
-        stmt.setString(5, txt_KhachHang_DiaChi.getText());
-        stmt.setString(6, txt_KhachHang_SDT.getText());
-        stmt.setString(7, cb_KhachHang_Loai.getSelectedItem().toString());
-        stmt.setString(8, txt_KhachHang_GhiChu.getText());
-        stmt.executeUpdate();
-        loadKhachHangData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "INSERT INTO KhachHang (tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
+            stmt.setString(2, txt_KhachHang_SDT.getText());
+            stmt.setString(3, txt_KhachHang_soDuTaiKhoan.getText());
+            stmt.setInt(4, Integer.parseInt(txt_KhachHang_soDuTaiKhoan.getText()));
+            stmt.setString(5, txt_KhachHang_DiaChi.getText());
+            stmt.setString(6, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
+            stmt.executeUpdate();
+            loadKhachHangData(); // Cập nhật lại bảng
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
     //sửa khách hàng
     private void btn_KhachHang_SuaActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "UPDATE KhachHang SET TenKhachHang = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SDT = ?, LoaiKhachHang = ?, ChuThich = ? WHERE MaKhachHang = ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
-        stmt.setString(2, "2025-04-20"); // Thay bằng giá trị từ ComboBox
-        stmt.setString(3, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
-        stmt.setString(4, txt_KhachHang_DiaChi.getText());
-        stmt.setString(5, txt_KhachHang_SDT.getText());
-        stmt.setString(6, cb_KhachHang_Loai.getSelectedItem().toString());
-        stmt.setString(7, txt_KhachHang_GhiChu.getText());
-        stmt.setString(8, txt_KhachHang_maKhachHang.getText());
-        stmt.executeUpdate();
-        loadKhachHangData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "UPDATE KhachHang SET tenKH = ?, SDT = ?, Email = ?, soDuTaiKhoan = ?, diaChi = ?, gioiTinh = ? WHERE MaKhachHang = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
+            stmt.setString(2, txt_KhachHang_SDT.getText());
+            stmt.setString(3, txt_KhachHang_soDuTaiKhoan.getText());
+            stmt.setInt(4, Integer.parseInt(txt_KhachHang_soDuTaiKhoan.getText()));
+            stmt.setString(5, txt_KhachHang_DiaChi.getText());
+            stmt.setString(6, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
+            stmt.setString(7, txt_KhachHang_maKhachHang.getText());
+            stmt.executeUpdate();
+            loadKhachHangData(); // Cập nhật lại bảng
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }   
     //xóa khách hàng
     private void btn_KhachHang_XoaActionPerformed(java.awt.event.ActionEvent evt) {
     try (Connection conn = ModelConnectSQL.getConnection()) {
@@ -102,44 +96,49 @@ public class LayoutKhachHang extends javax.swing.JFrame {
 }
     //tìm kiếm khách hàng
     private void btn_KhachHang_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {
-    DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
-    model.setRowCount(0); // Xóa dữ liệu cũ
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "SELECT * FROM KhachHang WHERE TenKhachHang LIKE ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, "%" + txt_KhachHang_TimKiemTen.getText() + "%");
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("STT"),
-                rs.getString("MaKhachHang"),
-                rs.getString("TenKhachHang"),
-                rs.getString("NgaySinh"),
-                rs.getString("GioiTinh"),
-                rs.getString("DiaChi"),
-                rs.getString("SDT"),
-                rs.getString("LoaiKhachHang"),
-                rs.getString("ChuThich")
-            });
+        DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
+        model.setRowCount(0); // Xóa dữ liệu cũ
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "SELECT tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang WHERE tenKH LIKE ? OR SDT LIKE ? OR gioiTinh LIKE ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, "%" + txt_KhachHang_TimKiemTen.getText() + "%");
+            stmt.setString(2, "%" + txt_KhachHang_TimKiemSDT.getText() + "%");
+            stmt.setString(3, "%" + txt_KhachHang_TimKiemLoaiKhachHang.getSelectedItem().toString() + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getString("tenKH"),
+                    rs.getString("SDT"),
+                    rs.getString("Email"),
+                    rs.getInt("soDuTaiKhoan"),
+                    rs.getString("diaChi"),
+                    rs.getString("gioiTinh")
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
     //resert 
     private void btn_KhachHang_ResertActionPerformed(java.awt.event.ActionEvent evt) {
-    txt_KhachHang_maKhachHang.setText("");
-    txt_KhachHang_tenKhachHang.setText("");
-    txt_KhachHang_DiaChi.setText("");
-    txt_KhachHang_SDT.setText("");
-    txt_KhachHang_GhiChu.setText("");
-    btnGr_GioiTinh.clearSelection();
-    cb_KhachHang_Loai.setSelectedIndex(0);
-    cb_KhachHang_NS_day.setSelectedIndex(0);
-    cb_KhachHang_NS_month.setSelectedIndex(0);
-    cb_KhachHang_NS_year.setSelectedIndex(0);
-    cb_KhachHang_Loai.setSelectedIndex(0);
-}
+        // Xóa dữ liệu trong các trường nhập liệu
+        txt_KhachHang_tenKhachHang.setText("");
+        txt_KhachHang_DiaChi.setText("");
+        txt_KhachHang_SDT.setText("");
+        txt_KhachHang_soDuTaiKhoan.setText("");
+        txt_KhachHang_soDuTaiKhoan.setText("");
+        txt_KhachHang_GhiChu.setText("");
+        txt_KhachHang_TimKiemTen.setText("");
+        txt_KhachHang_TimKiemSDT.setText("");
+        txt_KhachHang_TimKiemLoaiKhachHang.setSelectedIndex(0);
+        btnGr_GioiTinh.clearSelection();
+        cb_KhachHang_NS_day.setSelectedIndex(0);
+        cb_KhachHang_NS_month.setSelectedIndex(0);
+        cb_KhachHang_NS_year.setSelectedIndex(0);
+
+        // Làm mới bảng dữ liệu
+        loadKhachHangData();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,6 +186,8 @@ public class LayoutKhachHang extends javax.swing.JFrame {
         txt_KhachHang_TimKiemLoaiKhachHang = new javax.swing.JComboBox<>();
         txt_KhachHang_maKhachHang = new javax.swing.JTextField();
         txt_KhachHang_tenKhachHang = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txt_KhachHang_soDuTaiKhoan = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,17 +195,17 @@ public class LayoutKhachHang extends javax.swing.JFrame {
 
         tb_KhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Khách Hàng", "Tên khách hàng", "Ngày Sinh", "Giới Tính", "Địa Chỉ", "SĐT", "Loại Khách Hàng", "Chú Thích"
+                "Mã Khách Hàng", "Tên khách hàng", "SĐT", "Email", "Số Dư Tài Khoản", "Địa Chỉ", "Giới Tính"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -262,6 +263,8 @@ public class LayoutKhachHang extends javax.swing.JFrame {
 
         txt_KhachHang_TimKiemLoaiKhachHang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vip ", "Sinh Viên", "Thường" }));
 
+        jLabel1.setText("Số dư ");
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -305,13 +308,16 @@ public class LayoutKhachHang extends javax.swing.JFrame {
                                 .addComponent(jLabel34))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel36)))))
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_KhachHang_DiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(txt_KhachHang_DiaChi)
                     .addComponent(cb_KhachHang_Loai, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_KhachHang_SDT))
+                    .addComponent(jScrollPane10)
+                    .addComponent(txt_KhachHang_SDT)
+                    .addComponent(txt_KhachHang_soDuTaiKhoan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_KhachHang_Sua, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -360,35 +366,41 @@ public class LayoutKhachHang extends javax.swing.JFrame {
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel38)
                             .addComponent(txt_KhachHang_TimKiemTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel31)
-                    .addComponent(btn_KhachHang_Sua)
-                    .addComponent(txt_KhachHang_tenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cb_KhachHang_NS_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel32)
-                            .addComponent(cb_KhachHang_NS_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_KhachHang_NS_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel31)
+                                .addComponent(btn_KhachHang_Sua)
+                                .addComponent(txt_KhachHang_tenKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cb_KhachHang_NS_day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel32)
+                                    .addComponent(cb_KhachHang_NS_month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cb_KhachHang_NS_year, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel11Layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel39)
+                                    .addComponent(txt_KhachHang_TimKiemSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn_KhachHang_Xoa)
+                                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel40)
+                                        .addComponent(txt_KhachHang_TimKiemLoaiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(8, 8, 8)
+                        .addComponent(txt_KhachHang_soDuTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel36)
-                            .addComponent(cb_KhachHang_Loai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel39)
-                            .addComponent(txt_KhachHang_TimKiemSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btn_KhachHang_Xoa)
-                            .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel40)
-                                .addComponent(txt_KhachHang_TimKiemLoaiKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(cb_KhachHang_Loai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,7 +451,7 @@ public class LayoutKhachHang extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1541, Short.MAX_VALUE)
+            .addGap(0, 1587, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -479,6 +491,7 @@ public class LayoutKhachHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_KhachHang_NS_day;
     private javax.swing.JComboBox<String> cb_KhachHang_NS_month;
     private javax.swing.JComboBox<String> cb_KhachHang_NS_year;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -502,6 +515,7 @@ public class LayoutKhachHang extends javax.swing.JFrame {
     private javax.swing.JTextField txt_KhachHang_TimKiemSDT;
     private javax.swing.JTextField txt_KhachHang_TimKiemTen;
     private javax.swing.JTextField txt_KhachHang_maKhachHang;
+    private javax.swing.JTextField txt_KhachHang_soDuTaiKhoan;
     private javax.swing.JTextField txt_KhachHang_tenKhachHang;
     // End of variables declaration//GEN-END:variables
 }

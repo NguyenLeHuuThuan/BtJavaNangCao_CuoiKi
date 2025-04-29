@@ -26,106 +26,114 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         btn_Resert.addActionListener(evt -> btn_DoiTac_ResertActionPerformed(evt));
     }
     private void loadDoiTacData() {
-    DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
-    model.setRowCount(0); // Xóa dữ liệu cũ
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "SELECT * FROM DoiTac"; // Thay bằng tên bảng của bạn
-        PreparedStatement stmt = conn.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("STT"),
-                rs.getString("MaDoiTac"),
-                rs.getString("TenDoiTac"),
-                rs.getString("DiaChi"),
-                rs.getString("SDT"),
-                rs.getString("Email"),
-                rs.getString("ChuThich")
-            });
+        DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
+        model.setRowCount(0); // Xóa dữ liệu cũ
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "SELECT MaDoiTac, TenDoiTac, DiaChi, SDT, Email, ChuThich FROM DoiTac";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                model.addRow(new Object[]{
+                    rs.getInt("MaDoiTac"), // Hiển thị mã tự tăng
+                    rs.getString("TenDoiTac"),
+                    rs.getString("DiaChi"),
+                    rs.getString("SDT"),
+                    rs.getString("Email"),
+                    rs.getString("ChuThich")
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    } catch (Exception e) {
-        e.printStackTrace();
     }
-}
     //thêm đối tác
     private void btn_DoiTac_ThemActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "INSERT INTO DoiTac (MaDoiTac, TenDoiTac, DiaChi, SDT, Email, ChuThich) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_maNhaPhanPhoi.getText());
-        stmt.setString(2, txt_tenNhaPhanPhoi.getText());
-        stmt.setString(3, txt_DiaChi.getText());
-        stmt.setString(4, txt_SDT.getText());
-        stmt.setString(5, txt_Email.getText());
-        stmt.setString(6, txt_ChuThich.getText());
-        stmt.executeUpdate();
-        loadDoiTacData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
+        try (Connection conn = ModelConnectSQL.getConnection()) {
+            String query = "INSERT INTO DoiTac (TenDoiTac, DiaChi, SDT, Email, ChuThich) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, txt_tenNhaPhanPhoi.getText());
+            stmt.setString(2, txt_DiaChi.getText());
+            stmt.setString(3, txt_SDT.getText());
+            stmt.setString(4, txt_Email.getText());
+            stmt.setString(5, txt_ChuThich.getText());
+            stmt.executeUpdate();
+            loadDoiTacData(); // Cập nhật lại bảng
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
     //sửa đối tác
     private void btn_DoiTac_SuaActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "UPDATE DoiTac SET TenDoiTac = ?, DiaChi = ?, SDT = ?, Email = ?, ChuThich = ? WHERE MaDoiTac = ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_tenNhaPhanPhoi.getText());
-        stmt.setString(2, txt_DiaChi.getText());
-        stmt.setString(3, txt_SDT.getText());
-        stmt.setString(4, txt_Email.getText());
-        stmt.setString(5, txt_ChuThich.getText());
-        stmt.setString(6, txt_maNhaPhanPhoi.getText());
-        stmt.executeUpdate();
-        loadDoiTacData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
+        int selectedRow = tb_DoiTac.getSelectedRow();
+        if (selectedRow != -1) {
+            int maDoiTac = (int) tb_DoiTac.getValueAt(selectedRow, 0); // Lấy Mã Đối Tác từ cột 0
+            try (Connection conn = ModelConnectSQL.getConnection()) {
+                String query = "UPDATE DoiTac SET TenDoiTac = ?, DiaChi = ?, SDT = ?, Email = ?, ChuThich = ? WHERE MaDoiTac = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setString(1, txt_tenNhaPhanPhoi.getText());
+                stmt.setString(2, txt_DiaChi.getText());
+                stmt.setString(3, txt_SDT.getText());
+                stmt.setString(4, txt_Email.getText());
+                stmt.setString(5, txt_ChuThich.getText());
+                stmt.setInt(6, maDoiTac); // Sử dụng Mã Đối Tác để xác định bản ghi
+                stmt.executeUpdate();
+                loadDoiTacData(); // Cập nhật lại bảng
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-}
     //xóa đối tác
     private void btn_DoiTac_XoaActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "DELETE FROM DoiTac WHERE MaDoiTac = ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_maNhaPhanPhoi.getText());
-        stmt.executeUpdate();
-        loadDoiTacData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
+        int selectedRow = tb_DoiTac.getSelectedRow();
+        if (selectedRow != -1) {
+            int maDoiTac = (int) tb_DoiTac.getValueAt(selectedRow, 0); // Lấy Mã Đối Tác từ cột 0
+            try (Connection conn = ModelConnectSQL.getConnection()) {
+                String query = "DELETE FROM DoiTac WHERE MaDoiTac = ?";
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, maDoiTac); // Sử dụng Mã Đối Tác để xác định bản ghi
+                stmt.executeUpdate();
+                loadDoiTacData(); // Cập nhật lại bảng
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
-}
     //tìm kiếm đối tác
     private void btn_DoiTac_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {
-    DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
-    model.setRowCount(0); // Xóa dữ liệu cũ
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "SELECT * FROM DoiTac WHERE TenDoiTac LIKE ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, "%" + txt_tenNhaPhanPhoi.getText() + "%");
-        ResultSet rs = stmt.executeQuery();
-        while (rs.next()) {
-            model.addRow(new Object[]{
-                rs.getInt("STT"),
-                rs.getString("MaDoiTac"),
-                rs.getString("TenDoiTac"),
-                rs.getString("DiaChi"),
-                rs.getString("SDT"),
-                rs.getString("Email"),
-                rs.getString("ChuThich")
-            });
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
+       DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
+       model.setRowCount(0); 
+       try (Connection conn = ModelConnectSQL.getConnection()) {
+           // Truy vấn tìm kiếm theo tên đối tác hoặc SĐT
+           String query = "SELECT MaDoiTac, TenDoiTac, DiaChi, SDT, Email, ChuThich FROM DoiTac WHERE TenDoiTac LIKE ? OR SDT LIKE ?";
+           PreparedStatement stmt = conn.prepareStatement(query);
+           stmt.setString(1, "%" + txt_tenNhaPhanPhoi.getText() + "%"); 
+           stmt.setString(2, "%" + txt_SDT.getText() + "%"); 
+           ResultSet rs = stmt.executeQuery();
+           while (rs.next()) {
+               model.addRow(new Object[]{
+                   rs.getInt("MaDoiTac"),
+                   rs.getString("TenDoiTac"),
+                   rs.getString("DiaChi"),
+                   rs.getString("SDT"),
+                   rs.getString("Email"),
+                   rs.getString("ChuThich")
+               });
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
     //resert
     private void btn_DoiTac_ResertActionPerformed(java.awt.event.ActionEvent evt) {
-    txt_maNhaPhanPhoi.setText("");
-    txt_tenNhaPhanPhoi.setText("");
-    txt_DiaChi.setText("");
-    txt_SDT.setText("");
-    txt_Email.setText("");
-    txt_ChuThich.setText("");
-}
+        txt_tenNhaPhanPhoi.setText("");
+        txt_DiaChi.setText("");
+        txt_SDT.setText("");
+        txt_matKhau.setText("");
+        txt_Email.setText("");
+        txt_ChuThich.setText("");
+        tb_DoiTac.clearSelection(); 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -148,7 +156,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
         jScrollPane14 = new javax.swing.JScrollPane();
         txt_ChuThich = new javax.swing.JTextArea();
-        txt_maNhaPhanPhoi = new javax.swing.JTextField();
+        txt_matKhau = new javax.swing.JTextField();
         txt_tenNhaPhanPhoi = new javax.swing.JTextField();
         txt_DiaChi = new javax.swing.JTextField();
         txt_SDT = new javax.swing.JTextField();
@@ -170,11 +178,11 @@ public class LayoutDoiTac extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã", "Tên đối tác", "Địa chỉ", "SĐT", "Email", "Chú thích"
+                "Mã", "Tên đối tác", "SĐT", "Địa chỉ", "Mật khẩu", "Email", "Chú thích"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -183,7 +191,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         });
         jScrollPane13.setViewportView(tb_DoiTac);
 
-        jLabel51.setText("Mã nhà phân phối");
+        jLabel51.setText("Mật khẩu");
 
         jLabel52.setText("Tên nhà phân phối");
 
@@ -217,14 +225,14 @@ public class LayoutDoiTac extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel56)
-                            .addComponent(jLabel52)
-                            .addComponent(jLabel51)
                             .addComponent(jLabel53)
+                            .addComponent(jLabel55)
+                            .addComponent(jLabel52)
                             .addComponent(jLabel54)
-                            .addComponent(jLabel55))
-                        .addGap(46, 46, 46)
+                            .addComponent(jLabel51))
+                        .addGap(101, 101, 101)
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_maNhaPhanPhoi)
+                            .addComponent(txt_matKhau)
                             .addComponent(txt_tenNhaPhanPhoi)
                             .addComponent(txt_DiaChi)
                             .addComponent(txt_SDT)
@@ -247,22 +255,22 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel51)
-                    .addComponent(txt_maNhaPhanPhoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel52)
                     .addComponent(txt_tenNhaPhanPhoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel54)
+                    .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel53)
                     .addComponent(txt_DiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel54)
-                    .addComponent(txt_SDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel51)
+                    .addComponent(txt_matKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel55)
@@ -314,7 +322,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1546, Short.MAX_VALUE)
+            .addGap(0, 1597, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -360,7 +368,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_SDT;
-    private javax.swing.JTextField txt_maNhaPhanPhoi;
+    private javax.swing.JTextField txt_matKhau;
     private javax.swing.JTextField txt_tenNhaPhanPhoi;
     // End of variables declaration//GEN-END:variables
 }
