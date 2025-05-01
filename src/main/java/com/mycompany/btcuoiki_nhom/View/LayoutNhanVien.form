@@ -138,7 +138,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txt_NhanVien_tenNhanVien" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
+                                  <Component id="txt_NhanVien_TenNV" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                                   <Component id="txt_NhanVien_maNhanVien" alignment="0" min="-2" pref="151" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -153,32 +153,32 @@
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cb_NhanVien_ChucVu" alignment="0" pref="203" max="32767" attributes="0"/>
-                          <Component id="txt_NhanVien_DienThoai" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_NhanVien_DiaChi" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
                           </Group>
                           <Component id="txt_NhanVien_SDT" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton37" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_NhanVien_Resert" linkSize="1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jButton36" linkSize="1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton35" max="32767" attributes="0"/>
-                                  <Component id="jButton34" linkSize="1" pref="137" max="32767" attributes="0"/>
+                                  <Component id="btn_NhanVien_Xoa" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btn_NhanVien_Sua" max="32767" attributes="0"/>
+                                  <Component id="btn_NhanVien_Them" linkSize="1" pref="137" max="32767" attributes="0"/>
                               </Group>
+                              <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
-                                      <Component id="jButton38" min="-2" pref="150" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace min="-2" pref="174" max="-2" attributes="0"/>
-                                      <Component id="jComboBox19" min="-2" pref="56" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jComboBox19" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace pref="44" max="32767" attributes="0"/>
                                       <Component id="jTextField25" min="-2" pref="138" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Component id="btn_NhanVien_TimKiem" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -196,15 +196,15 @@
                           <Component id="txt_NhanVien_maNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="cb_NhanVien_ChucVu" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton34" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton38" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_NhanVien_Them" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_NhanVien_TimKiem" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_NhanVien_tenNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_NhanVien_TenNV" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
@@ -212,8 +212,8 @@
                               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel47" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txt_NhanVien_DienThoai" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton35" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_NhanVien_DiaChi" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_NhanVien_Sua" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBox19" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextField25" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -246,14 +246,14 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                              <Component id="jButton36" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_NhanVien_Xoa" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel49" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane12" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton37" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_NhanVien_Resert" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                   </Group>
@@ -283,17 +283,12 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txt_NhanVien_maNhanVien">
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_NhanVien_tenNhanVien">
+            <Component class="javax.swing.JTextField" name="txt_NhanVien_TenNV">
             </Component>
             <Component class="javax.swing.JComboBox" name="NgayVao_Day">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -303,12 +298,7 @@
             <Component class="javax.swing.JComboBox" name="NgayVao_Month">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -318,12 +308,7 @@
             <Component class="javax.swing.JComboBox" name="NgayVao_Year">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -360,17 +345,12 @@
                 <Property name="text" type="java.lang.String" value="Ch&#xfa; th&#xed;ch"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_NhanVien_DienThoai">
+            <Component class="javax.swing.JTextField" name="txt_NhanVien_DiaChi">
             </Component>
             <Component class="javax.swing.JComboBox" name="cb_NhanVien_ChucVu">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -394,30 +374,37 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton34">
+            <Component class="javax.swing.JButton" name="btn_NhanVien_Them">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_NhanVien_ThemActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton35">
+            <Component class="javax.swing.JButton" name="btn_NhanVien_Sua">
               <Properties>
                 <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_NhanVien_SuaActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton36">
+            <Component class="javax.swing.JButton" name="btn_NhanVien_Xoa">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Xo&#xe1;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_NhanVien_XoaActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton37">
+            <Component class="javax.swing.JButton" name="btn_NhanVien_Resert">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Resert"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton38">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_NhanVien_ResertActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox19">
               <Properties>
@@ -434,6 +421,14 @@
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField25">
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_NhanVien_TimKiem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_NhanVien_TimKiemActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

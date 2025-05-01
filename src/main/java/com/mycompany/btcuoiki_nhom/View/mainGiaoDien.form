@@ -49,8 +49,6 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="btn_DangNhap" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="btn_DangXuat" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_DoiTac" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_NhanVien" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_KhachHang" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -74,11 +72,7 @@
                   <Component id="btn_NhanVien" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                   <Component id="btn_DoiTac" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  <Component id="btn_DangXuat" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                  <Component id="btn_DangNhap" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -123,16 +117,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_SanPhamActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_DangXuat">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng Xu&#x1ea5;t"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btn_DangNhap">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x110;&#x103;ng Nh&#x1ead;p"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

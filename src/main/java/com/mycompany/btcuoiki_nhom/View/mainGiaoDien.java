@@ -46,8 +46,6 @@ public class mainGiaoDien extends javax.swing.JFrame {
         btn_NhanVien = new javax.swing.JButton();
         btn_DoiTac = new javax.swing.JButton();
         btn_SanPham = new javax.swing.JButton();
-        btn_DangXuat = new javax.swing.JButton();
-        btn_DangNhap = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,10 +84,6 @@ public class mainGiaoDien extends javax.swing.JFrame {
             }
         });
 
-        btn_DangXuat.setText("Đăng Xuất");
-
-        btn_DangNhap.setText("Đăng Nhập");
-
         javax.swing.GroupLayout LayoutDanhMucLayout = new javax.swing.GroupLayout(LayoutDanhMuc);
         LayoutDanhMuc.setLayout(LayoutDanhMucLayout);
         LayoutDanhMucLayout.setHorizontalGroup(
@@ -97,8 +91,6 @@ public class mainGiaoDien extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LayoutDanhMucLayout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(LayoutDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_DangNhap)
-                    .addComponent(btn_DangXuat)
                     .addComponent(btn_DoiTac)
                     .addComponent(btn_NhanVien)
                     .addComponent(btn_KhachHang)
@@ -107,7 +99,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        LayoutDanhMucLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_DangNhap, btn_DangXuat, btn_DoiTac, btn_HoaDon, btn_KhachHang, btn_NhanVien, btn_SanPham});
+        LayoutDanhMucLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_DoiTac, btn_HoaDon, btn_KhachHang, btn_NhanVien, btn_SanPham});
 
         LayoutDanhMucLayout.setVerticalGroup(
             LayoutDanhMucLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,11 +114,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
                 .addComponent(btn_NhanVien)
                 .addGap(64, 64, 64)
                 .addComponent(btn_DoiTac)
-                .addGap(43, 43, 43)
-                .addComponent(btn_DangXuat)
-                .addGap(46, 46, 46)
-                .addComponent(btn_DangNhap)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -227,8 +215,6 @@ public class mainGiaoDien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LayoutDanhMuc;
-    private javax.swing.JButton btn_DangNhap;
-    private javax.swing.JButton btn_DangXuat;
     private javax.swing.JButton btn_DoiTac;
     private javax.swing.JButton btn_HoaDon;
     private javax.swing.JButton btn_KhachHang;
