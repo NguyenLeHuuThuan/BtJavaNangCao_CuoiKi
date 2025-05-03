@@ -23,12 +23,7 @@ public class LayoutNhanVien extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
-        loadNhanVienData(); // Gọi phương thức hiển thị dữ liệu
-            btn_NhanVien_Them.addActionListener(evt -> btn_NhanVien_ThemActionPerformed(evt));
-            btn_NhanVien_Sua.addActionListener(evt -> btn_NhanVien_SuaActionPerformed(evt));
-            btn_NhanVien_Xoa.addActionListener(evt -> btn_NhanVien_XoaActionPerformed(evt));
-            btn_NhanVien_TimKiem.addActionListener(evt -> btn_NhanVien_TimKiemActionPerformed(evt));
-            btn_NhanVien_Resert.addActionListener(evt -> btn_NhanVien_ResertActionPerformed(evt));
+        
     }
      private void loadNhanVienData() {
         DefaultTableModel model = (DefaultTableModel) tb_NhanVien.getModel();

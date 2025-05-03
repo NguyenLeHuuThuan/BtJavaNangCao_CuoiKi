@@ -5,9 +5,12 @@
 package com.mycompany.btcuoiki_nhom.View;
 
 import Model.modelConnectSQLServer;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +30,35 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         this.btn_Sua.addActionListener(evt -> btn_SuaActionPerformed(evt));
         this.btn_Them.addActionListener(evt -> btn_ThemActionPerformed(evt));
         this.btn_Xoa.addActionListener(evt -> btn_XoaActionPerformed(evt));
+        
+        this.tb_DoiTac.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent e){
+                // Chỉ xử lý khi nhấn đúp chuột
+                if (tb_DoiTac.getSelectedRow() != -1) {
+                    int selected = tb_DoiTac.getSelectedRow();
+                    
+
+                    String tenDoiTac = tb_DoiTac.getValueAt(selected, 1).toString();
+                    String SDT = tb_DoiTac.getValueAt(selected, 2).toString();
+                    String diaChi = tb_DoiTac.getValueAt(selected, 3).toString();
+                    String matKhau = tb_DoiTac.getValueAt(selected, 4).toString();
+                    String email = tb_DoiTac.getValueAt(selected, 5).toString();
+                    String chuThich = tb_DoiTac.getValueAt(selected,6).toString();
+
+                    
+
+                    txt_tenNhaPhanPhoi.setText(tenDoiTac);
+                    txt_SDT.setText(SDT);
+                    txt_DiaChi.setText(diaChi);
+                    txt_matKhau.setText(matKhau);
+                    txt_Email.setText(email);
+                    txt_ChuThich.setText(chuThich);
+                }
+                else{
+                    System.out.println("Lỗi");
+                }
+             }
+         });
     }
 
     /**
@@ -67,17 +99,17 @@ public class LayoutDoiTac extends javax.swing.JFrame {
 
         tb_DoiTac.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã đối tác", "Tên đối tác", "Địa chỉ", "SĐT", "Email", "Chú thích"
+                "Mã đối tác", "Tên đối tác", "SĐT", "Địa chỉ", "Mật khẩu", "Email", "Chú thích"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -264,7 +296,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
         model.setRowCount(0); // Xóa dữ liệu cũ
         try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
-            String query = "SELECT maNCC, tenNCC, SDT, diaChi, matKhau, Email, chuThich FROM NhaCungCap";
+            String query = "SELECT maNCC, tenNCC, SDT, diaChi, matKhau,  Email, chuThich FROM NhaCungCap";
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -304,25 +336,24 @@ public class LayoutDoiTac extends javax.swing.JFrame {
 
     private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
         int selectedRow = tb_DoiTac.getSelectedRow();
-        if (selectedRow != -1) {
-            int maNCC = (int) tb_DoiTac.getValueAt(selectedRow, 0); 
-            try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
-                String query = "UPDATE NhaCungCap SET tenNCC = ?, SDT = ?, diaChi = ?, matKhau = ?, Email = ?, chuThich = ? WHERE maNCC = ?";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                stmt.setString(1, txt_tenNhaPhanPhoi.getText());
-                stmt.setString(2, txt_SDT.getText());
-                stmt.setString(3, txt_DiaChi.getText());
-                stmt.setString(4, txt_matKhau.getText());
-                stmt.setString(5, txt_Email.getText());
-                stmt.setString(6, txt_ChuThich.getText());
-                stmt.setInt(7, maNCC); // Sử dụng mã nhà cung cấp để xác định bản ghi
-                stmt.executeUpdate();
-                loadDoiTacData(); 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
+       if (selectedRow != -1) {
+           int maNCC = (int) tb_DoiTac.getValueAt(selectedRow, 0); 
+           try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+               String query = "UPDATE NhaCungCap SET tenNCC = ?, SDT = ?, diaChi = ?, matKhau = ?, Email = ?, chuThich = ? WHERE maNCC = ?";
+               PreparedStatement stmt = conn.prepareStatement(query);
+               stmt.setString(1, txt_tenNhaPhanPhoi.getText());
+               stmt.setString(2, txt_SDT.getText());
+               stmt.setString(3, txt_DiaChi.getText());
+               stmt.setString(4, txt_matKhau.getText());
+               stmt.setString(5, txt_Email.getText());
+               stmt.setString(6, txt_ChuThich.getText());
+               stmt.setInt(7, maNCC); 
+               stmt.executeUpdate();
+               loadDoiTacData(); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
     }//GEN-LAST:event_btn_SuaActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed

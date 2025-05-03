@@ -46,8 +46,12 @@ public class mainGiaoDien extends javax.swing.JFrame {
         btn_NhanVien = new javax.swing.JButton();
         btn_DoiTac = new javax.swing.JButton();
         btn_SanPham = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        LayoutDanhMuc.setBackground(new java.awt.Color(0, 204, 204));
 
         btn_HoaDon.setText("Hoá Đơn");
         btn_HoaDon.addActionListener(new java.awt.event.ActionListener() {
@@ -106,15 +110,38 @@ public class mainGiaoDien extends javax.swing.JFrame {
             .addGroup(LayoutDanhMucLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(btn_HoaDon)
-                .addGap(59, 59, 59)
+                .addGap(29, 29, 29)
                 .addComponent(btn_SanPham)
-                .addGap(34, 34, 34)
+                .addGap(36, 36, 36)
                 .addComponent(btn_KhachHang)
-                .addGap(67, 67, 67)
+                .addGap(36, 36, 36)
                 .addComponent(btn_NhanVien)
-                .addGap(64, 64, 64)
+                .addGap(33, 33, 33)
                 .addComponent(btn_DoiTac)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 204));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel1.setText("CHÀO MỪNG ĐẾN DỰ ÁN CỦA CHÚNG EM");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(185, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -124,13 +151,17 @@ public class mainGiaoDien extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LayoutDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(616, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LayoutDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LayoutDanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -141,7 +172,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
          layoutDoiTac.setVisible(false);
          this.layoutHoaDon.setVisible(true);
         this.layoutKhachHang.setVisible(false); 
-        this.layoutNhanVien.setVisible(false); 
+        //this.layoutNhanVien.setVisible(false); 
         this.layoutSanPham.setVisible(false); 
          
     }//GEN-LAST:event_btn_HoaDonActionPerformed
@@ -150,7 +181,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
         layoutDoiTac.setVisible(false);
          this.layoutHoaDon.setVisible(false);   
         this.layoutKhachHang.setVisible(true); 
-        this.layoutNhanVien.setVisible(false); 
+        //this.layoutNhanVien.setVisible(false); 
         this.layoutSanPham.setVisible(false); 
     }//GEN-LAST:event_btn_KhachHangActionPerformed
 
@@ -158,7 +189,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
         layoutDoiTac.setVisible(false);
          this.layoutHoaDon.setVisible(false);
         this.layoutKhachHang.setVisible(false); 
-        this.layoutNhanVien.setVisible(false); 
+        //this.layoutNhanVien.setVisible(false); 
         this.layoutSanPham.setVisible(true); 
     }//GEN-LAST:event_btn_SanPhamActionPerformed
 
@@ -166,7 +197,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
         layoutDoiTac.setVisible(false);
          this.layoutHoaDon.setVisible(false);
         this.layoutKhachHang.setVisible(false); 
-        this.layoutNhanVien.setVisible(true); 
+        //this.layoutNhanVien.setVisible(true); 
         this.layoutSanPham.setVisible(false); 
     }//GEN-LAST:event_btn_NhanVienActionPerformed
 
@@ -174,7 +205,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
         layoutDoiTac.setVisible(true);
          this.layoutHoaDon.setVisible(false);
         this.layoutKhachHang.setVisible(false); 
-        this.layoutNhanVien.setVisible(false); 
+        //this.layoutNhanVien.setVisible(false); 
         this.layoutSanPham.setVisible(false); 
     }//GEN-LAST:event_btn_DoiTacActionPerformed
 
@@ -220,5 +251,7 @@ public class mainGiaoDien extends javax.swing.JFrame {
     private javax.swing.JButton btn_KhachHang;
     private javax.swing.JButton btn_NhanVien;
     private javax.swing.JButton btn_SanPham;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
