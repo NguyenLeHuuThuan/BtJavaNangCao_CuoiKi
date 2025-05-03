@@ -1,5 +1,8 @@
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Controller\controllerChiTietHoaDon.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Controller\ControllerEvent.java
-F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Model\ModelConnectSQL.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Controller\controllerNhanVien.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Controller\controllerPhieuMuaHang.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\Controller\controllerSanPham.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\GiaoDienChinh.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\LayoutDoiTac.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\LayoutHoaDon.java
@@ -7,3 +10,7 @@ F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_n
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\LayoutNhanVien.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\LayoutSanPham.java
 F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\com\mycompany\btcuoiki_nhom\View\mainGiaoDien.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\Model\modelChiTietHoaDon.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\Model\modelConnectSQLServer.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\Model\modelPhieuMuaHang.java
+F:\zNetBeansProjects\BtJavaNangCao_CuoiKi\src\main\java\Model\modelSanPham.java

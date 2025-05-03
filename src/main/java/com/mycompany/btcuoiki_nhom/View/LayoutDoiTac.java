@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.btcuoiki_nhom.View;
-import com.mycompany.btcuoiki_nhom.Model.ModelConnectSQL;
 import java.sql.Connection;
+import Model.modelConnectSQLServer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
@@ -24,22 +24,36 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         btn_Sua.addActionListener(evt -> btn_DoiTac_SuaActionPerformed(evt));
         btn_Xoa.addActionListener(evt -> btn_DoiTac_XoaActionPerformed(evt));
         btn_Resert.addActionListener(evt -> btn_DoiTac_ResertActionPerformed(evt));
+            // Thêm sự kiện chọn dòng trong bảng
+        tb_DoiTac.getSelectionModel().addListSelectionListener(event -> {
+            int selectedRow = tb_DoiTac.getSelectedRow();
+            if (selectedRow != -1) {
+                // Lấy dữ liệu từ các cột của dòng được chọn
+                txt_tenNhaPhanPhoi.setText(tb_DoiTac.getValueAt(selectedRow, 1).toString()); 
+                txt_SDT.setText(tb_DoiTac.getValueAt(selectedRow, 2).toString());         
+                txt_DiaChi.setText(tb_DoiTac.getValueAt(selectedRow, 3).toString());       
+                txt_matKhau.setText(tb_DoiTac.getValueAt(selectedRow, 4).toString());      
+                txt_Email.setText(tb_DoiTac.getValueAt(selectedRow, 5).toString());         
+                txt_ChuThich.setText(tb_DoiTac.getValueAt(selectedRow, 6).toString());      
+            }
+        });
     }
     private void loadDoiTacData() {
         DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
-        model.setRowCount(0); // Xóa dữ liệu cũ
-        try (Connection conn = ModelConnectSQL.getConnection()) {
-            String query = "SELECT MaDoiTac, TenDoiTac, DiaChi, SDT, Email, ChuThich FROM DoiTac";
+        model.setRowCount(0); 
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+            String query = "SELECT maNCC, tenNCC, SDT, diaChi, matKhau, Email, chuThich FROM NhaCungCap";
             PreparedStatement stmt = conn.prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 model.addRow(new Object[]{
-                    rs.getInt("MaDoiTac"), // Hiển thị mã tự tăng
-                    rs.getString("TenDoiTac"),
-                    rs.getString("DiaChi"),
-                    rs.getString("SDT"),
-                    rs.getString("Email"),
-                    rs.getString("ChuThich")
+                    rs.getInt("maNCC"), 
+                    rs.getString("tenNCC"), 
+                    rs.getString("SDT"), 
+                    rs.getString("diaChi"), 
+                    rs.getString("matKhau"), 
+                    rs.getString("Email"), 
+                    rs.getString("chuThich") 
                 });
             }
         } catch (Exception e) {
@@ -48,76 +62,78 @@ public class LayoutDoiTac extends javax.swing.JFrame {
     }
     //thêm đối tác
     private void btn_DoiTac_ThemActionPerformed(java.awt.event.ActionEvent evt) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
-            String query = "INSERT INTO DoiTac (TenDoiTac, DiaChi, SDT, Email, ChuThich) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, txt_tenNhaPhanPhoi.getText());
-            stmt.setString(2, txt_DiaChi.getText());
-            stmt.setString(3, txt_SDT.getText());
-            stmt.setString(4, txt_Email.getText());
-            stmt.setString(5, txt_ChuThich.getText());
-            stmt.executeUpdate();
-            loadDoiTacData(); // Cập nhật lại bảng
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+      try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+          String query = "INSERT INTO NhaCungCap (tenNCC, SDT, diaChi, matKhau, Email, chuThich) VALUES (?, ?, ?, ?, ?, ?)";
+          PreparedStatement stmt = conn.prepareStatement(query);
+          stmt.setString(1, txt_tenNhaPhanPhoi.getText());
+          stmt.setString(2, txt_SDT.getText());
+          stmt.setString(3, txt_DiaChi.getText());
+          stmt.setString(4, txt_matKhau.getText());
+          stmt.setString(5, txt_Email.getText());
+          stmt.setString(6, txt_ChuThich.getText());
+          stmt.executeUpdate();
+          loadDoiTacData(); 
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
     //sửa đối tác
     private void btn_DoiTac_SuaActionPerformed(java.awt.event.ActionEvent evt) {
-        int selectedRow = tb_DoiTac.getSelectedRow();
-        if (selectedRow != -1) {
-            int maDoiTac = (int) tb_DoiTac.getValueAt(selectedRow, 0); // Lấy Mã Đối Tác từ cột 0
-            try (Connection conn = ModelConnectSQL.getConnection()) {
-                String query = "UPDATE DoiTac SET TenDoiTac = ?, DiaChi = ?, SDT = ?, Email = ?, ChuThich = ? WHERE MaDoiTac = ?";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                stmt.setString(1, txt_tenNhaPhanPhoi.getText());
-                stmt.setString(2, txt_DiaChi.getText());
-                stmt.setString(3, txt_SDT.getText());
-                stmt.setString(4, txt_Email.getText());
-                stmt.setString(5, txt_ChuThich.getText());
-                stmt.setInt(6, maDoiTac); // Sử dụng Mã Đối Tác để xác định bản ghi
-                stmt.executeUpdate();
-                loadDoiTacData(); // Cập nhật lại bảng
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+       int selectedRow = tb_DoiTac.getSelectedRow();
+       if (selectedRow != -1) {
+           int maNCC = (int) tb_DoiTac.getValueAt(selectedRow, 0); 
+           try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+               String query = "UPDATE NhaCungCap SET tenNCC = ?, SDT = ?, diaChi = ?, matKhau = ?, Email = ?, chuThich = ? WHERE maNCC = ?";
+               PreparedStatement stmt = conn.prepareStatement(query);
+               stmt.setString(1, txt_tenNhaPhanPhoi.getText());
+               stmt.setString(2, txt_SDT.getText());
+               stmt.setString(3, txt_DiaChi.getText());
+               stmt.setString(4, txt_matKhau.getText());
+               stmt.setString(5, txt_Email.getText());
+               stmt.setString(6, txt_ChuThich.getText());
+               stmt.setInt(7, maNCC); 
+               stmt.executeUpdate();
+               loadDoiTacData(); 
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+       }
+   }
     //xóa đối tác
     private void btn_DoiTac_XoaActionPerformed(java.awt.event.ActionEvent evt) {
-        int selectedRow = tb_DoiTac.getSelectedRow();
-        if (selectedRow != -1) {
-            int maDoiTac = (int) tb_DoiTac.getValueAt(selectedRow, 0); // Lấy Mã Đối Tác từ cột 0
-            try (Connection conn = ModelConnectSQL.getConnection()) {
-                String query = "DELETE FROM DoiTac WHERE MaDoiTac = ?";
-                PreparedStatement stmt = conn.prepareStatement(query);
-                stmt.setInt(1, maDoiTac); // Sử dụng Mã Đối Tác để xác định bản ghi
-                stmt.executeUpdate();
-                loadDoiTacData(); // Cập nhật lại bảng
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+      int selectedRow = tb_DoiTac.getSelectedRow();
+      if (selectedRow != -1) {
+          int maNCC = (int) tb_DoiTac.getValueAt(selectedRow, 0); 
+          try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+              String query = "DELETE FROM NhaCungCap WHERE maNCC = ?";
+              PreparedStatement stmt = conn.prepareStatement(query);
+              stmt.setInt(1, maNCC); 
+              stmt.executeUpdate();
+              loadDoiTacData(); 
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
+      }
+  }
     //tìm kiếm đối tác
     private void btn_DoiTac_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {
        DefaultTableModel model = (DefaultTableModel) tb_DoiTac.getModel();
        model.setRowCount(0); 
-       try (Connection conn = ModelConnectSQL.getConnection()) {
-           // Truy vấn tìm kiếm theo tên đối tác hoặc SĐT
-           String query = "SELECT MaDoiTac, TenDoiTac, DiaChi, SDT, Email, ChuThich FROM DoiTac WHERE TenDoiTac LIKE ? OR SDT LIKE ?";
+       try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+           String query = "SELECT maNCC, tenNCC, SDT, diaChi, matKhau, Email, chuThich FROM NhaCungCap WHERE tenNCC LIKE ? OR SDT LIKE ?";
            PreparedStatement stmt = conn.prepareStatement(query);
            stmt.setString(1, "%" + txt_tenNhaPhanPhoi.getText() + "%"); 
            stmt.setString(2, "%" + txt_SDT.getText() + "%"); 
            ResultSet rs = stmt.executeQuery();
            while (rs.next()) {
                model.addRow(new Object[]{
-                   rs.getInt("MaDoiTac"),
-                   rs.getString("TenDoiTac"),
-                   rs.getString("DiaChi"),
+                   rs.getInt("maNCC"),
+                   rs.getString("tenNCC"),
                    rs.getString("SDT"),
+                   rs.getString("diaChi"),
+                   rs.getString("matKhau"),
                    rs.getString("Email"),
-                   rs.getString("ChuThich")
+                   rs.getString("chuThich")
                });
            }
        } catch (Exception e) {
@@ -125,15 +141,15 @@ public class LayoutDoiTac extends javax.swing.JFrame {
        }
    }
     //resert
-    private void btn_DoiTac_ResertActionPerformed(java.awt.event.ActionEvent evt) {
-        txt_tenNhaPhanPhoi.setText("");
-        txt_DiaChi.setText("");
-        txt_SDT.setText("");
-        txt_matKhau.setText("");
-        txt_Email.setText("");
-        txt_ChuThich.setText("");
-        tb_DoiTac.clearSelection(); 
-    }
+        private void btn_DoiTac_ResertActionPerformed(java.awt.event.ActionEvent evt) {
+          txt_tenNhaPhanPhoi.setText("");
+          txt_DiaChi.setText("");
+          txt_SDT.setText("");
+          txt_matKhau.setText("");
+          txt_Email.setText("");
+          txt_ChuThich.setText("");
+          tb_DoiTac.clearSelection(); 
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

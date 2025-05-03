@@ -4,17 +4,20 @@
  */
 package com.mycompany.btcuoiki_nhom.Controller;
 
-import com.mycompany.btcuoiki_nhom.Model.ModelConnectSQL;
+import Model.modelConnectSQLServer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Hieu
+ */
 public class ControllerEvent {
-
     // Thêm nhân viên
     public void addNhanVien(String maNhanVien, String tenNhanVien, String ngaySinh, String gioiTinh, String ngayVaoLam, String chucVu, String diaChi, String sdt, String chuThich) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "INSERT INTO NhanVien (MaNhanVien, TenNhanVien, NgaySinh, GioiTinh, NgayVaoLam, ChucVu, DiaChi, SDT, ChuThich) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, maNhanVien);
@@ -34,7 +37,7 @@ public class ControllerEvent {
 
     // Sửa nhân viên
     public void updateNhanVien(String maNhanVien, String tenNhanVien, String ngaySinh, String gioiTinh, String ngayVaoLam, String chucVu, String diaChi, String sdt, String chuThich) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "UPDATE NhanVien SET TenNhanVien = ?, NgaySinh = ?, GioiTinh = ?, NgayVaoLam = ?, ChucVu = ?, DiaChi = ?, SDT = ?, ChuThich = ? WHERE MaNhanVien = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, tenNhanVien);
@@ -54,7 +57,7 @@ public class ControllerEvent {
 
     // Xóa nhân viên
     public void deleteNhanVien(String maNhanVien) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "DELETE FROM NhanVien WHERE MaNhanVien = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, maNhanVien);
@@ -67,7 +70,7 @@ public class ControllerEvent {
     // Tìm kiếm nhân viên
     public void searchNhanVien(DefaultTableModel model, String column, String keyword) {
         model.setRowCount(0); // Xóa dữ liệu cũ
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "SELECT * FROM NhanVien WHERE " + column + " LIKE ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, "%" + keyword + "%");
@@ -95,7 +98,7 @@ public class ControllerEvent {
 
     // Thêm khách hàng
     public void addKhachHang(String maKhachHang, String tenKhachHang, String ngaySinh, String gioiTinh, String diaChi, String sdt, String loaiKhachHang, String chuThich) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "INSERT INTO KhachHang (MaKhachHang, TenKhachHang, NgaySinh, GioiTinh, DiaChi, SDT, LoaiKhachHang, ChuThich) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, maKhachHang);
@@ -114,7 +117,7 @@ public class ControllerEvent {
 
     // Sửa khách hàng
     public void updateKhachHang(String maKhachHang, String tenKhachHang, String ngaySinh, String gioiTinh, String diaChi, String sdt, String loaiKhachHang, String chuThich) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "UPDATE KhachHang SET TenKhachHang = ?, NgaySinh = ?, GioiTinh = ?, DiaChi = ?, SDT = ?, LoaiKhachHang = ?, ChuThich = ? WHERE MaKhachHang = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, tenKhachHang);
@@ -133,7 +136,7 @@ public class ControllerEvent {
 
     // Xóa khách hàng
     public void deleteKhachHang(String maKhachHang) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "DELETE FROM KhachHang WHERE MaKhachHang = ?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, maKhachHang);

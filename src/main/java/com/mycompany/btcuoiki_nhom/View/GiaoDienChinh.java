@@ -36,9 +36,6 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         this.btn_NhanVien.addActionListener(e -> layout.show(this.LayoutChinh, "LayoutNhanVien"));
         this.btn_SanPham.addActionListener(e -> layout.show(this.LayoutChinh, "LayoutSanPham"));
     }
-    public static void main(String[] args) {
-        new GiaoDienChinh().setVisible(true);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,6 +58,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         LayoutChinh = new javax.swing.JPanel();
         LayoutHoaDon = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel6 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tb_HoaDon_PhieuMuaHang = new javax.swing.JTable();
@@ -103,7 +101,6 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
         LayoutSanPham = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -326,6 +323,19 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         );
 
         LayoutChinh.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1350, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 718, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Chi Tiết phiếu mua", jPanel6);
 
         tb_HoaDon_PhieuMuaHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -605,7 +615,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(192, 192, 192)
                         .addComponent(jLabel2)))
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,24 +635,13 @@ public class GiaoDienChinh extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Phiếu mua hàng", jPanel5);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1536, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Chi Tiết phiếu mua", jPanel6);
-
         javax.swing.GroupLayout LayoutHoaDonLayout = new javax.swing.GroupLayout(LayoutHoaDon);
         LayoutHoaDon.setLayout(LayoutHoaDonLayout);
         LayoutHoaDonLayout.setHorizontalGroup(
             LayoutHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(LayoutHoaDonLayout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         LayoutHoaDonLayout.setVerticalGroup(
             LayoutHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1763,7 +1762,7 @@ public class GiaoDienChinh extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
+                .addGap(24, 24, 24)
                 .addComponent(LayoutDanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LayoutChinh, javax.swing.GroupLayout.PREFERRED_SIZE, 1541, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1803,7 +1802,9 @@ public class GiaoDienChinh extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
+    public static void main(String[] args) {
+        new GiaoDienChinh().setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel LayoutChinh;

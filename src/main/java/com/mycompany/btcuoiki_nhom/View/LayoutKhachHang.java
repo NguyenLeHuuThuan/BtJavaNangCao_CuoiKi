@@ -3,8 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.btcuoiki_nhom.View;
-import com.mycompany.btcuoiki_nhom.Model.ModelConnectSQL;
 import java.sql.Connection;
+import Model.modelConnectSQLServer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
@@ -25,31 +25,54 @@ public class LayoutKhachHang extends javax.swing.JFrame {
             btn_KhachHang_Xoa.addActionListener(evt -> btn_KhachHang_XoaActionPerformed(evt));
             btn_KhachHang_TimKiem.addActionListener(evt -> btn_KhachHang_TimKiemActionPerformed(evt));
             btn_KhachHang_Resert.addActionListener(evt -> btn_KhachHang_ResertActionPerformed(evt));
+                        // Thêm sự kiện chọn dòng trong bảng
+            tb_KhachHang.getSelectionModel().addListSelectionListener(event -> {
+                int selectedRow = tb_KhachHang.getSelectedRow();
+                if (selectedRow != -1) {
+                    // Lấy dữ liệu từ các cột của dòng được chọn
+                    txt_KhachHang_maKhachHang.setText(tb_KhachHang.getValueAt(selectedRow, 0).toString()); 
+                    txt_KhachHang_tenKhachHang.setText(tb_KhachHang.getValueAt(selectedRow, 1).toString()); 
+                    txt_KhachHang_SDT.setText(tb_KhachHang.getValueAt(selectedRow, 2).toString());        
+                    txt_KhachHang_soDuTaiKhoan.setText(tb_KhachHang.getValueAt(selectedRow, 4).toString()); 
+                    txt_KhachHang_DiaChi.setText(tb_KhachHang.getValueAt(selectedRow, 5).toString());     
+
+                    // Xử lý giới tính
+                    String gioiTinh = tb_KhachHang.getValueAt(selectedRow, 6).toString();
+                    if (gioiTinh.equalsIgnoreCase("Nam")) {
+                        RadioNam.setSelected(true);
+                    } else if (gioiTinh.equalsIgnoreCase("Nữ")) {
+                        RadioNu.setSelected(true);
+                    } else {
+                        RadioKhac.setSelected(true);
+                    }
+                }
+            });
     }
     private void loadKhachHangData() {
-        DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
-        model.setRowCount(0); // Xóa dữ liệu cũ
-        try (Connection conn = ModelConnectSQL.getConnection()) {
-            String query = "SELECT tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getString("tenKH"),
-                    rs.getString("SDT"),
-                    rs.getString("Email"),
-                    rs.getInt("soDuTaiKhoan"),
-                    rs.getString("diaChi"),
-                    rs.getString("gioiTinh")
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+      DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
+      model.setRowCount(0); 
+      try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+          String query = "SELECT maKH, tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang";
+          PreparedStatement stmt = conn.prepareStatement(query);
+          ResultSet rs = stmt.executeQuery();
+          while (rs.next()) {
+              model.addRow(new Object[]{
+                  rs.getInt("maKH"),          
+                  rs.getString("tenKH"),      
+                  rs.getString("SDT"),        
+                  rs.getString("Email"),      
+                  rs.getInt("soDuTaiKhoan"), 
+                  rs.getString("diaChi"),    
+                  rs.getString("gioiTinh")    
+              });
+          }
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
     //thêm khách hàng
     private void btn_KhachHang_ThemActionPerformed(java.awt.event.ActionEvent evt) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
+        try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
             String query = "INSERT INTO KhachHang (tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
@@ -59,73 +82,76 @@ public class LayoutKhachHang extends javax.swing.JFrame {
             stmt.setString(5, txt_KhachHang_DiaChi.getText());
             stmt.setString(6, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
             stmt.executeUpdate();
-            loadKhachHangData(); // Cập nhật lại bảng
+            loadKhachHangData(); 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     //sửa khách hàng
     private void btn_KhachHang_SuaActionPerformed(java.awt.event.ActionEvent evt) {
-        try (Connection conn = ModelConnectSQL.getConnection()) {
-            String query = "UPDATE KhachHang SET tenKH = ?, SDT = ?, Email = ?, soDuTaiKhoan = ?, diaChi = ?, gioiTinh = ? WHERE MaKhachHang = ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
-            stmt.setString(2, txt_KhachHang_SDT.getText());
-            stmt.setString(3, txt_KhachHang_soDuTaiKhoan.getText());
-            stmt.setInt(4, Integer.parseInt(txt_KhachHang_soDuTaiKhoan.getText()));
-            stmt.setString(5, txt_KhachHang_DiaChi.getText());
-            stmt.setString(6, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
-            stmt.setString(7, txt_KhachHang_maKhachHang.getText());
-            stmt.executeUpdate();
-            loadKhachHangData(); // Cập nhật lại bảng
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }   
+       try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+           String query = "UPDATE KhachHang SET tenKH = ?, SDT = ?, Email = ?, soDuTaiKhoan = ?, diaChi = ?, gioiTinh = ? WHERE maKH = ?";
+           PreparedStatement stmt = conn.prepareStatement(query);
+           stmt.setString(1, txt_KhachHang_tenKhachHang.getText());
+           stmt.setString(2, txt_KhachHang_SDT.getText());
+           stmt.setString(3, txt_KhachHang_soDuTaiKhoan.getText());
+           stmt.setInt(4, Integer.parseInt(txt_KhachHang_soDuTaiKhoan.getText()));
+           stmt.setString(5, txt_KhachHang_DiaChi.getText());
+           stmt.setString(6, RadioNam.isSelected() ? "Nam" : (RadioNu.isSelected() ? "Nữ" : "Khác"));
+           stmt.setInt(7, Integer.parseInt(txt_KhachHang_maKhachHang.getText())); 
+           stmt.executeUpdate();
+           loadKhachHangData(); 
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
     //xóa khách hàng
     private void btn_KhachHang_XoaActionPerformed(java.awt.event.ActionEvent evt) {
-    try (Connection conn = ModelConnectSQL.getConnection()) {
-        String query = "DELETE FROM KhachHang WHERE MaKhachHang = ?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setString(1, txt_KhachHang_maKhachHang.getText());
-        stmt.executeUpdate();
-        loadKhachHangData(); // Cập nhật lại bảng
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
+       try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+           String query = "DELETE FROM KhachHang WHERE maKH = ?";
+           PreparedStatement stmt = conn.prepareStatement(query);
+           stmt.setInt(1, Integer.parseInt(txt_KhachHang_maKhachHang.getText())); 
+           stmt.executeUpdate();
+           loadKhachHangData(); 
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
     //tìm kiếm khách hàng
     private void btn_KhachHang_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {
-        DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
-        model.setRowCount(0); // Xóa dữ liệu cũ
-        try (Connection conn = ModelConnectSQL.getConnection()) {
-            String query = "SELECT tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang WHERE tenKH LIKE ? OR SDT LIKE ? OR gioiTinh LIKE ?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, "%" + txt_KhachHang_TimKiemTen.getText() + "%");
-            stmt.setString(2, "%" + txt_KhachHang_TimKiemSDT.getText() + "%");
-            stmt.setString(3, "%" + txt_KhachHang_TimKiemLoaiKhachHang.getSelectedItem().toString() + "%");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                model.addRow(new Object[]{
-                    rs.getString("tenKH"),
-                    rs.getString("SDT"),
-                    rs.getString("Email"),
-                    rs.getInt("soDuTaiKhoan"),
-                    rs.getString("diaChi"),
-                    rs.getString("gioiTinh")
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+       DefaultTableModel model = (DefaultTableModel) tb_KhachHang.getModel();
+       model.setRowCount(0); 
+       try (Connection conn = modelConnectSQLServer.connectSQLServer()) {
+           // Truy vấn tìm kiếm theo tên khách hàng, SĐT hoặc loại khách hàng
+           String query = "SELECT maKH, tenKH, SDT, Email, soDuTaiKhoan, diaChi, gioiTinh FROM KhachHang " +
+                          "WHERE tenKH LIKE ? OR SDT LIKE ? OR gioiTinh LIKE ?";
+           PreparedStatement stmt = conn.prepareStatement(query);
+           stmt.setString(1, "%" + txt_KhachHang_TimKiemTen.getText() + "%"); 
+           stmt.setString(2, "%" + txt_KhachHang_TimKiemSDT.getText() + "%"); 
+           stmt.setString(3, "%" + txt_KhachHang_TimKiemLoaiKhachHang.getSelectedItem().toString() + "%"); 
+           ResultSet rs = stmt.executeQuery();
+           while (rs.next()) {
+               model.addRow(new Object[]{
+                   rs.getInt("maKH"),          
+                   rs.getString("tenKH"),    
+                   rs.getString("SDT"),       
+                   rs.getString("Email"),      
+                   rs.getInt("soDuTaiKhoan"),  
+                   rs.getString("diaChi"),     
+                   rs.getString("gioiTinh")    
+               });
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+   }
     //resert 
     private void btn_KhachHang_ResertActionPerformed(java.awt.event.ActionEvent evt) {
         // Xóa dữ liệu trong các trường nhập liệu
+        txt_KhachHang_maKhachHang.setText("");
         txt_KhachHang_tenKhachHang.setText("");
         txt_KhachHang_DiaChi.setText("");
         txt_KhachHang_SDT.setText("");
-        txt_KhachHang_soDuTaiKhoan.setText("");
         txt_KhachHang_soDuTaiKhoan.setText("");
         txt_KhachHang_GhiChu.setText("");
         txt_KhachHang_TimKiemTen.setText("");
@@ -188,6 +214,7 @@ public class LayoutKhachHang extends javax.swing.JFrame {
         txt_KhachHang_tenKhachHang = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txt_KhachHang_soDuTaiKhoan = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -417,6 +444,8 @@ public class LayoutKhachHang extends javax.swing.JFrame {
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout LayoutKhachHangLayout = new javax.swing.GroupLayout(LayoutKhachHang);
         LayoutKhachHang.setLayout(LayoutKhachHangLayout);
         LayoutKhachHangLayout.setHorizontalGroup(
@@ -425,7 +454,9 @@ public class LayoutKhachHang extends javax.swing.JFrame {
                 .addGroup(LayoutKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(LayoutKhachHangLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane9))
+                        .addComponent(jScrollPane9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(LayoutKhachHangLayout.createSequentialGroup()
                         .addGap(575, 575, 575)
                         .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -440,11 +471,17 @@ public class LayoutKhachHang extends javax.swing.JFrame {
             .addGroup(LayoutKhachHangLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(LayoutKhachHangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(LayoutKhachHangLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(LayoutKhachHangLayout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -463,9 +500,9 @@ public class LayoutKhachHang extends javax.swing.JFrame {
             .addGap(0, 745, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 2, Short.MAX_VALUE)
                     .addComponent(LayoutKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
 
         pack();
@@ -491,6 +528,7 @@ public class LayoutKhachHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_KhachHang_NS_day;
     private javax.swing.JComboBox<String> cb_KhachHang_NS_month;
     private javax.swing.JComboBox<String> cb_KhachHang_NS_year;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
