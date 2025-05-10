@@ -1,0 +1,21 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/
+build/
+dist/
+
+# Maven
+target/
+
+# Java
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+
