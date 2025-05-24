@@ -4,66 +4,99 @@
  */
 package Model;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author Hieu
  */
 public class modelPhieuMuaHang {
-    private int maHoaDon ;
-    private String khachHang ;
-    private String ngayNhapHoaDon ;
-    private double tongTien;
-    private String chuThich ;
+    private int maDH ;
+    private int KHno ;
+    private Date ngayTaoDH ;
+    private String DiaChi ;
+    private String email ;
+    private String sdt ;
+    private String nguoiNhan ;
+    
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    
+    public modelPhieuMuaHang(int maDH, int KHno, String ngayTaoDH, String DiaChi, String email, String sdt, String nguoiNhan) throws ParseException {
+        this.maDH = maDH;
+        this.KHno = KHno;
+        // Bước 1: parse từ String thành java.util.Date
+        java.util.Date parsedDate = dateFormat.parse(ngayTaoDH);
 
-    public modelPhieuMuaHang(int maHoaDon, String khachHang, String ngayNhapHoaDon, double tongTien, String chuThich) {
-        this.maHoaDon = maHoaDon;
-        this.khachHang = khachHang;
-        this.ngayNhapHoaDon = ngayNhapHoaDon;
-        this.tongTien = tongTien;
-        this.chuThich = chuThich;
+        // Bước 2: chuyển thành java.sql.Date
+        this.ngayTaoDH = new java.sql.Date(parsedDate.getTime());
+        this.DiaChi = DiaChi;
+        this.email = email;
+        this.sdt = sdt;
+        this.nguoiNhan = nguoiNhan;
     }
 
     public modelPhieuMuaHang() {
     }
 
-    public int getMaHoaDon() {
-        return maHoaDon;
+    public int getMaDH() {
+        return maDH;
     }
 
-    public void setMaHoaDon(int maHoaDon) {
-        this.maHoaDon = maHoaDon;
+    public void setMaDH(int maDH) {
+        this.maDH = maDH;
     }
 
-    public String getKhachHang() {
-        return khachHang;
+    public int getKHno() {
+        return KHno;
     }
 
-    public void setKhachHang(String khachHang) {
-        this.khachHang = khachHang;
+    public void setKHno(int KHno) {
+        this.KHno = KHno;
     }
 
-    public String getNgayNhapHoaDon() {
-        return ngayNhapHoaDon;
+    public Date getNgayTaoDH() {
+        return this.ngayTaoDH;
     }
 
-    public void setNgayNhapHoaDon(String ngayNhapHoaDon) {
-        this.ngayNhapHoaDon = ngayNhapHoaDon;
+    public void setNgayTaoDH(String ngayTaoDH) throws ParseException {
+        java.util.Date parsedDate = dateFormat.parse(ngayTaoDH);
+        this.ngayTaoDH = new java.sql.Date(parsedDate.getTime());
     }
 
-    public double getTongTien() {
-        return tongTien;
+    public String getDiaChi() {
+        return DiaChi;
     }
 
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
     }
 
-    public String getChuThich() {
-        return chuThich;
+    public String getEmail() {
+        return email;
     }
 
-    public void setChuThich(String chuThich) {
-        this.chuThich = chuThich;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    public String getSdt() {
+        return sdt;
+    }
+
+    public void setSdt(String sdt) {
+        this.sdt = sdt;
+    }
+
+    public String getNguoiNhan() {
+        return nguoiNhan;
+    }
+
+    public void setNguoiNhan(String nguoiNhan) {
+        this.nguoiNhan = nguoiNhan;
+    }
+    
+    
     
 }

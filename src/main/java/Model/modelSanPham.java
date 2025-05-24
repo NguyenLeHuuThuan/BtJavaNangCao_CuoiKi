@@ -11,23 +11,21 @@ package Model;
 public class modelSanPham {
     private int maSP ;
     private String tenSanPham ;
-    private double giaNhap ;
     private double giaBan ;
-    private String hangSX ;
-    private int tonKho ;
+    private int soLuongHienCon ;
+    private int maDM ;
     private String linkAnh ;
 
-    public modelSanPham() {
-    }
-
-    public modelSanPham(int maSP, String tenSanPham, double giaNhap, double giaBan, String hangSX, int tonKho, String linkAnh) {
+    public modelSanPham(int maSP, String tenSanPham, double giaBan, int soLuongHienCon, int maDM, String linkAnh) {
         this.maSP = maSP;
         this.tenSanPham = tenSanPham;
-        this.giaNhap = giaNhap;
         this.giaBan = giaBan;
-        this.hangSX = hangSX;
-        this.tonKho = tonKho;
+        this.soLuongHienCon = soLuongHienCon;
+        this.maDM = maDM;
         this.linkAnh = linkAnh;
+    }
+
+    public modelSanPham() {
     }
 
     public int getMaSP() {
@@ -46,14 +44,6 @@ public class modelSanPham {
         this.tenSanPham = tenSanPham;
     }
 
-    public double getGiaNhap() {
-        return giaNhap;
-    }
-
-    public void setGiaNhap(double giaNhap) {
-        this.giaNhap = giaNhap;
-    }
-
     public double getGiaBan() {
         return giaBan;
     }
@@ -62,20 +52,20 @@ public class modelSanPham {
         this.giaBan = giaBan;
     }
 
-    public String getHangSX() {
-        return hangSX;
+    public int getSoLuongHienCon() {
+        return soLuongHienCon;
     }
 
-    public void setHangSX(String hangSX) {
-        this.hangSX = hangSX;
+    public void setSoLuongHienCon(int soLuongHienCon) {
+        this.soLuongHienCon = soLuongHienCon;
     }
 
-    public int getTonKho() {
-        return tonKho;
+    public int getMaDM() {
+        return maDM;
     }
 
-    public void setTonKho(int tonKho) {
-        this.tonKho = tonKho;
+    public void setMaDM(int maDM) {
+        this.maDM = maDM;
     }
 
     public String getLinkAnh() {
@@ -85,6 +75,6 @@ public class modelSanPham {
     public void setLinkAnh(String linkAnh) {
         this.linkAnh = linkAnh;
     }
-    
+
     
 }

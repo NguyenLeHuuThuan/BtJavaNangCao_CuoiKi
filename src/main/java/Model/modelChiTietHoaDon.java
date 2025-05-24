@@ -10,22 +10,52 @@ package Model;
  */
 public class modelChiTietHoaDon {
     private int maHD ;
-    private String tenSP ;
-    private int soLuong ;
+    private int tenSP ;
+    private int maSize ;
+    private int soLuongDat ;
     private double donGia ;
-    private double tongTien ;
 
-    public modelChiTietHoaDon(int maHD, String tenSP, int soLuong, double donGia, double tongTien) {
+    public modelChiTietHoaDon(int maHD, int tenSP, int maSize, int soLuongDat, double donGia) {
         this.maHD = maHD;
         this.tenSP = tenSP;
-        this.soLuong = soLuong;
+        this.maSize = maSize;
+        this.soLuongDat = soLuongDat;
         this.donGia = donGia;
-        this.tongTien = tongTien;
     }
 
-    
-
     public modelChiTietHoaDon() {
+    }
+
+    public int getMaHD() {
+        return maHD;
+    }
+
+    public void setMaHD(int maHD) {
+        this.maHD = maHD;
+    }
+
+    public int getTenSP() {
+        return tenSP;
+    }
+
+    public void setTenSP(int tenSP) {
+        this.tenSP = tenSP;
+    }
+
+    public int getMaSize() {
+        return maSize;
+    }
+
+    public void setMaSize(int maSize) {
+        this.maSize = maSize;
+    }
+
+    public int getSoLuongDat() {
+        return soLuongDat;
+    }
+
+    public void setSoLuongDat(int soLuongDat) {
+        this.soLuongDat = soLuongDat;
     }
 
     public double getDonGia() {
@@ -36,37 +66,6 @@ public class modelChiTietHoaDon {
         this.donGia = donGia;
     }
     
-    public int getMaHD() {
-        return maHD;
-    }
 
-    public void setMaHD(int maHD) {
-        this.maHD = maHD;
-    }
-
-    public String getTenSP() {
-        return tenSP;
-    }
-
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public double getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(double tongTien) {
-        this.tongTien = tongTien;
-    }
-    
     
 }

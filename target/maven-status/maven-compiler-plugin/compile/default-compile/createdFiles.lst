@@ -9,6 +9,7 @@ com\mycompany\btcuoiki_nhom\View\LayoutHoaDon.class
 com\mycompany\btcuoiki_nhom\Controller\controllerChiTietHoaDon.class
 com\mycompany\btcuoiki_nhom\View\LayoutNhanVien$3.class
 com\mycompany\btcuoiki_nhom\View\LayoutKhachHang$4.class
+com\mycompany\btcuoiki_nhom\View\LayoutHoaDon$3.class
 com\mycompany\btcuoiki_nhom\View\GiaoDienChinh$8.class
 com\mycompany\btcuoiki_nhom\View\LayoutDoiTac$3.class
 com\mycompany\btcuoiki_nhom\View\mainGiaoDien$1.class

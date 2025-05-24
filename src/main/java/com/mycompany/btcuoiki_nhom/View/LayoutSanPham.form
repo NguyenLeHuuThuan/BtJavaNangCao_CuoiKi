@@ -88,7 +88,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                              <Component id="jPanel4" min="-2" pref="1080" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jScrollPane5" min="-2" pref="765" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
@@ -125,13 +125,12 @@
                     <Component class="javax.swing.JTable" name="tb_SanPham">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="7" rowCount="4">
+                          <Table columnCount="6" rowCount="4">
                             <Column editable="true" title="M&#xe3; S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.Integer"/>
                             <Column editable="true" title="T&#xea;n S&#x1ea3;n Ph&#x1ea9;m" type="java.lang.String"/>
-                            <Column editable="true" title="Gi&#xe1; Nh&#x1ead;p" type="java.lang.Integer"/>
-                            <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Integer"/>
-                            <Column editable="true" title="H&#xe3;ng S&#x1ea3;n Xu&#x1ea5;t" type="java.lang.String"/>
-                            <Column editable="true" title="T&#x1ed3;n Kho" type="java.lang.Integer"/>
+                            <Column editable="true" title="Gi&#xe1; B&#xe1;n" type="java.lang.Double"/>
+                            <Column editable="true" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng Hi&#x1ec7;n C&#xf2;n" type="java.lang.Integer"/>
+                            <Column editable="true" title="M&#xe3; Danh M&#x1ee5;c" type="java.lang.Integer"/>
                             <Column editable="true" title="&#x1ea2;nh" type="java.lang.String"/>
                           </Table>
                         </Property>
@@ -145,79 +144,66 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lb_SanPham_DonVi" min="-2" pref="52" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="453" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="480" max="-2" attributes="0"/>
+                                      <Component id="btn_SanPham_Resert" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="txt_SanPham_GiaBan" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="btn_SanPham_Xoa" min="-2" pref="66" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Group type="102" attributes="0">
+                                                  <Component id="txt_SanPham_tenSanPham" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txt_MaDanhMuc" max="32767" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" attributes="0">
+                                                  <Component id="txt_SanPham_maSanPham" min="-2" pref="153" max="-2" attributes="0"/>
+                                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                                  <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                                  <Component id="txt_SanPham_TonKho" min="-2" pref="151" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                                          <Component id="btn_SanPham_Sua" min="-2" pref="66" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="txt_SanPham_GiaNhap" min="-2" pref="153" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="btn_SanPham_Resert" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="btn_SanPham_Xoa" min="-2" pref="66" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="157" max="-2" attributes="0"/>
-                                              <Component id="jTextField13" min="-2" pref="246" max="-2" attributes="0"/>
-                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="jLabel23" min="-2" pref="73" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txt_SanPham_maSanPham" min="-2" pref="153" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <Component id="txt_SanPham_tenSanPham" min="-2" pref="153" max="-2" attributes="0"/>
-                                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="txt_SanPham_HangSX" pref="151" max="32767" attributes="0"/>
-                                                  <Component id="txt_SanPham_TonKho" max="32767" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btn_SanPham_Them" min="-2" pref="66" max="-2" attributes="0"/>
-                                                  <Component id="btn_SanPham_Sua" alignment="1" min="-2" pref="66" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="jLabel23" min="-2" pref="73" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace min="-2" pref="212" max="-2" attributes="0"/>
-                                                      <Component id="btn_SanPham_DoiAnh" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="txt_LinkAnh" min="-2" pref="246" max="-2" attributes="0"/>
+                                              <EmptySpace max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace max="32767" attributes="0"/>
-                                              <Component id="lb_SanPham_DonVi" min="-2" pref="52" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="453" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-                                              <Component id="txt_SanPham_GiaBan" min="-2" pref="153" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="187" max="-2" attributes="0"/>
+                                      <Component id="btn_SanPham_DoiAnh" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -230,55 +216,48 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="txt_SanPham_maSanPham" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_SanPham_HangSX" alignment="1" min="-2" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="3" attributes="0">
-                                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="btn_SanPham_Sua" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                                  <Component id="txt_SanPham_maSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel20" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="103" groupAlignment="3" attributes="0">
+                                                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btn_SanPham_Sua" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
+                                          <Component id="txt_SanPham_TonKho" alignment="1" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                                      <Component id="btn_SanPham_Them" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                                       <Component id="btn_SanPham_Xoa" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_SanPham_GiaBan" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                                       <Component id="btn_SanPham_Resert" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                                       <Component id="lb_SanPham_DonVi" min="-2" pref="19" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                       <Component id="btn_SanPham_DoiAnh" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel23" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                                          <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_SanPham_tenSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="txt_SanPham_TonKho" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txt_SanPham_GiaNhap" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="txt_SanPham_GiaBan" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="jTextField13" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel23" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="3" attributes="0">
+                                              <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_SanPham_tenSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_MaDanhMuc" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="txt_LinkAnh" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="75" max="32767" attributes="0"/>
+                              <EmptySpace pref="78" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -294,23 +273,11 @@
                         <Property name="text" type="java.lang.String" value="T&#xea;n S&#x1ea3;n Ph&#x1ea9;m"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel17">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Gi&#xe1; Nh&#x1ead;p"/>
-                      </Properties>
-                    </Component>
                     <Component class="javax.swing.JTextField" name="txt_SanPham_maSanPham">
                     </Component>
                     <Component class="javax.swing.JTextField" name="txt_SanPham_tenSanPham">
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txt_SanPham_GiaNhap">
-                    </Component>
                     <Component class="javax.swing.JTextField" name="txt_SanPham_GiaBan">
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="jLabel19">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="H&#xe3;ng S&#x1ea3;n Xu&#x1ea5;t"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel20">
                       <Properties>
@@ -320,11 +287,6 @@
                     <Component class="javax.swing.JTextField" name="txt_SanPham_TonKho">
                     </Component>
                     <Component class="javax.swing.JLabel" name="lb_SanPham_DonVi">
-                    </Component>
-                    <Component class="javax.swing.JButton" name="btn_SanPham_Them">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
-                      </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="btn_SanPham_Sua">
                       <Properties>
@@ -349,19 +311,24 @@
                         <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i &#x1ea2;nh"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField13">
+                    <Component class="javax.swing.JTextField" name="txt_LinkAnh">
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel23">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="T&#xec;m Ki&#x1ebf;m"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="txt_SanPham_HangSX">
-                    </Component>
                     <Component class="javax.swing.JLabel" name="jLabel2">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Gi&#xe1; B&#xe1;n"/>
                       </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel3">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="M&#xe3; Danh M&#x1ee5;c"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="txt_MaDanhMuc">
                     </Component>
                   </SubComponents>
                 </Container>
