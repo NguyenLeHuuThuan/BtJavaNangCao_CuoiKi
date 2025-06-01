@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"com.mycompany.btcuoiki_nhom.Controller"},{"l":"com.mycompany.btcuoiki_nhom.Model"},{"l":"com.mycompany.btcuoiki_nhom.View"}];updateSearchResults();
