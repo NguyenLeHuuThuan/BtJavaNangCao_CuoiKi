@@ -85,7 +85,27 @@ public class PhieuMuaHangDao {
             JOptionPane.showMessageDialog(null, "Cập nhật thành công");
         }else
             JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
+
+    }
+    public ArrayList<modelPhieuMuaHang> TimKiem(String tenKhachHang) throws SQLException, ParseException{
+        ArrayList<modelPhieuMuaHang> list = new ArrayList<modelPhieuMuaHang>();
+        String query = "select * from DonDatHang_HoaDon dh join KhachHang kh on kh.maKH=dh.KHno	where kh.tenKH = ?";
+        Connection conn = ConnectSQLServer.connectSQLServer();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+       
+        while(rs.next()){
+            int MaDH = rs.getInt("maDH");
+                int MaKH = rs.getInt("KHno");
+                String NgayTaoDH = rs.getString("ngayTaoDH");
+                String diaChi = rs.getString("diaChi");
+                String Email = rs.getString("email");
+                String SDT = rs.getString("SDT");
+                String NguoiNhan = rs.getString("nguoiNhan");
+                
+                list.add(new modelPhieuMuaHang(MaDH, MaKH, NgayTaoDH, diaChi, Email, SDT, NguoiNhan));
+        }
         
-        
+        return list ;
     }
 }

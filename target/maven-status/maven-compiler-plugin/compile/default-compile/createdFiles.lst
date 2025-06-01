@@ -6,6 +6,7 @@ view\LayoutHoaDon$1.class
 view\LayoutKhachHang$2.class
 view\mainGiaoDien.class
 DBConnection\ConnectSQLServer.class
+view\LayoutDoiTac$7.class
 DAL_DataAccessLayer\ChiTietHoaDonDao.class
 view\LayoutNhanVien$1.class
 DAL_DataAccessLayer\SanPhamDao.class

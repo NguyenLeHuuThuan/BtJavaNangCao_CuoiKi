@@ -8,12 +8,15 @@ import BLL_BusinessLogicLayer.DoiTacManager;
 import Controller.controllerDoiTac;
 import DBConnection.ConnectSQLServer;
 import Model.modelDoiTac;
+import Model.modelKhachHang;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,6 +38,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         this.btn_Resert.addActionListener(DoiTacEvent);
         this.btn_Sua.addActionListener(DoiTacEvent);
         this.btn_Xoa.addActionListener(DoiTacEvent);
+        
     }
 
     /**
@@ -69,10 +73,13 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         btn_Xoa = new javax.swing.JButton();
         btn_Sua = new javax.swing.JButton();
         btn_Resert = new javax.swing.JButton();
+        txt_TimKiemTen = new javax.swing.JTextField();
+        btn_TimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel50.setText("Đối tác");
+        jLabel50.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel50.setText("Đối Tác");
 
         tb_DoiTac.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,13 +221,13 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         panel_NutBamLayout.setHorizontalGroup(
             panel_NutBamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_NutBamLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(50, 50, 50)
                 .addComponent(btn_Xoa)
-                .addGap(137, 137, 137)
+                .addGap(142, 142, 142)
                 .addComponent(btn_Sua)
-                .addGap(110, 110, 110)
+                .addGap(103, 103, 103)
                 .addComponent(btn_Resert)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         panel_NutBamLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_Resert, btn_Sua, btn_Xoa});
@@ -230,11 +237,18 @@ public class LayoutDoiTac extends javax.swing.JFrame {
             .addGroup(panel_NutBamLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(panel_NutBamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Xoa)
                     .addComponent(btn_Sua)
+                    .addComponent(btn_Xoa)
                     .addComponent(btn_Resert))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        btn_TimKiem.setText("Tìm Kiếm");
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +263,12 @@ public class LayoutDoiTac extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 823, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panel_NutBam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(panel_NutBam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(131, 131, 131)
+                                .addComponent(txt_TimKiemTen, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(btn_TimKiem)))
                         .addGap(19, 19, 19)
                         .addComponent(KhungThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -262,11 +281,16 @@ public class LayoutDoiTac extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_TimKiemTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_TimKiem))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panel_NutBam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(KhungThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -330,6 +354,26 @@ public class LayoutDoiTac extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_DoiTacMousePressed
 
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+        DefaultTableModel model = (DefaultTableModel) this.tb_DoiTac.getModel()  ;
+        String tenKh = this.txt_tenNhaPhanPhoi.getText().trim();
+        try {
+            ArrayList<modelDoiTac> list =  dtManager.TimKiem(tenKh);
+            model.setRowCount(0);
+            
+            if(list.isEmpty()){
+                JOptionPane.showMessageDialog(null, "Không tìm thầy tên đối tác");
+            }else{
+                for(modelDoiTac dt : list){
+                    model.addRow(new Object[]{dt.getMaDoiTac() , dt.getTenDoiTac(),dt.getSdt(),dt.getDiaChi() , dt.getMatKhau() ,dt.getEmail() , dt.getChuThich()});
+                }
+            }
+            this.txt_tenNhaPhanPhoi.setText("");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,6 +383,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
     private javax.swing.JPanel KhungThongTin;
     private javax.swing.JButton btn_Resert;
     private javax.swing.JButton btn_Sua;
+    private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_Xoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -357,6 +402,7 @@ public class LayoutDoiTac extends javax.swing.JFrame {
     public javax.swing.JTextField txt_Email;
     public javax.swing.JTextField txt_MaDoiTac;
     public javax.swing.JTextField txt_SDT;
+    private javax.swing.JTextField txt_TimKiemTen;
     public javax.swing.JTextField txt_matKhau;
     public javax.swing.JTextField txt_tenNhaPhanPhoi;
     // End of variables declaration//GEN-END:variables

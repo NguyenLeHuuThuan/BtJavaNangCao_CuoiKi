@@ -28,4 +28,8 @@ public class DoiTacManager {
     public void update(modelDoiTac dtNew) throws SQLException{
         dtDao.update(dtNew);
     }
+    
+    public ArrayList<modelDoiTac> TimKiem(String tenNCC) throws SQLException{
+        return dtDao.TimKiem(tenNCC);
+    }
 }

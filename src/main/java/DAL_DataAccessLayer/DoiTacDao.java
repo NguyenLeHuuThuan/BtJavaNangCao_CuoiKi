@@ -83,4 +83,32 @@ public class DoiTacDao {
         else
             JOptionPane.showMessageDialog(null, "Cập nhật không thành công");
     }
+    
+    public ArrayList<modelDoiTac> TimKiem(String tenNCC) throws SQLException{
+        ArrayList<modelDoiTac> list = new ArrayList<modelDoiTac>();
+        
+        String query = "SELECT maNCC, tenNCC, SDT, diaChi, matKhau,  Email, chuThich FROM NhaCungCap where tenNCC = ?";
+        
+        Connection conn = ConnectSQLServer.connectSQLServer();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, tenNCC);
+        ResultSet rs = ps.executeQuery();
+        
+        while(rs.next()){
+            int maDoiTac = rs.getInt("maNCC");
+            String tenDoiTac = rs.getString("tenNCC");
+            String sdt = rs.getString("SDT");
+            String diaChi = rs.getString("diaChi");
+            String matKhau = rs.getString("matKhau");
+            String email = rs.getString("Email");
+            String chuThich = rs.getString("chuThich");
+            
+            list.add(new modelDoiTac(maDoiTac, tenDoiTac, sdt, diaChi, matKhau, email, chuThich));
+                    
+        }
+        
+        return list ;
+    }  
+    
+    
 }
